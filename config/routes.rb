@@ -1,3 +1,5 @@
+require "#{Rails.application.config.root}/app/api/books_api"
+
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -5,8 +7,10 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  namespace :api do
-  end
+  mount GrapeSwaggerRails::Engine => '/swagger'
+
+  mount BooksApi => '/'
+
 
   # Defines the root path route ("/")
   # root "posts#index"

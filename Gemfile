@@ -33,7 +33,7 @@ gem "thruster", require: false
 # gem "image_processing", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
-# gem "rack-cors"
+gem "rack-cors"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -51,4 +51,30 @@ end
 
 gem "rspec-rails", "~> 7.1"
 
-gem "grape", "~> 2.2"
+gem "grape"
+
+gem 'grape-swagger'
+
+gem "grape-swagger-rails"
+
+gem "grape-entity", "~> 1.0"
+
+gem "grape-swagger-entity", "~> 0.5.5"
+2
+gem 'capybara'
+
+gem 'selenium-webdriver'
+
+gem 'webdrivers'
+
+gem 'webrick'
+
+gem "grape-entity-matchers", "~> 1.3"
+
+gem "roar", "~> 1.2"
+
+gem "grape-roar", "~> 0.3.0"
+
+gem 'ruby-grape-danger'
+
+gem 'grape-swagger-representable'

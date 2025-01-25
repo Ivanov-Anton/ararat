@@ -2,12 +2,17 @@ require_relative "boot"
 
 require "rails/all"
 
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
+
 module Ararat
   class Application < Rails::Application
+    require "#{config.root}/app/api/books_api"
+    BooksApi.compile!
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 
@@ -28,5 +33,8 @@ module Ararat
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
   end
 end
