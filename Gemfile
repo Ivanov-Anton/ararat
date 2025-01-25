@@ -50,3 +50,5 @@ end
 
 
 gem "rspec-rails", "~> 7.1"
+
+gem "grape", "~> 2.2"
