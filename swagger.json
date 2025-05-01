@@ -1,0 +1,238 @@
+{
+  "info": {
+    "title": "The API title to be displayed on the API homepage.",
+    "description": "A description of the API.",
+    "termsOfService": "https://example.com",
+    "contact": {
+      "name": "Contact name",
+      "email": "anton.i@hey.com",
+      "url": "https://example.com"
+    },
+    "license": {
+      "name": "The name of the license.",
+      "url": "https://example.com"
+    },
+    "version": "0.0.1"
+  },
+  "swagger": "2.0",
+  "produces": [
+    "application/json"
+  ],
+  "host": "example.org",
+  "tags": [
+    {
+      "name": "books",
+      "description": "Operations about books"
+    }
+  ],
+  "paths": {
+    "/api/books": {
+      "get": {
+        "description": "Return all books",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "filters[created_at]",
+            "description": "Filter by created AT field",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return all books",
+            "schema": {
+              "$ref": "#/definitions/BooksResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "tags": [
+          "books"
+        ],
+        "operationId": "books"
+      },
+      "post": {
+        "description": "Create a new book",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "createBook",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createBook"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create a new book",
+            "schema": {
+              "$ref": "#/definitions/BookEntity"
+            }
+          },
+          "401": {
+            "description": "KittenBitesError"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "tags": [
+          "books"
+        ],
+        "operationId": "createBook"
+      }
+    },
+    "/api/books/{id}": {
+      "get": {
+        "description": "Return a specific book by ID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Book ID",
+            "type": "integer",
+            "format": "int32",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return a specific book by ID",
+            "schema": {
+              "$ref": "#/definitions/BookEntity"
+            }
+          },
+          "401": {
+            "description": "KittenBitesError"
+          },
+          "404": {
+            "description": "Book not found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "tags": [
+          "books"
+        ],
+        "operationId": "book"
+      },
+      "delete": {
+        "description": "Delete specific book by ID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "format": "int32",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete specific book by ID"
+          }
+        },
+        "tags": [
+          "books"
+        ],
+        "operationId": "deleteBook"
+      }
+    }
+  },
+  "definitions": {
+    "BooksResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/BookEntity",
+          "description": "Array of books"
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "total_records": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Total count of books"
+            }
+          },
+          "description": "Metadata"
+        }
+      },
+      "description": "BooksResponse model"
+    },
+    "BookEntity": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Unique identifier for the book"
+        },
+        "title": {
+          "type": "string",
+          "example": "The Great Gatsby",
+          "description": "Title of the book"
+        },
+        "author": {
+          "type": "string",
+          "example": "F. Scott Fitzgerald",
+          "description": "Author of the book"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date the book was created"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date the book was last updated"
+        }
+      },
+      "description": "BookEntity model"
+    },
+    "createBook": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Book title"
+        },
+        "author": {
+          "type": "string",
+          "description": "Book author"
+        }
+      },
+      "required": [
+        "title",
+        "author"
+      ],
+      "description": "Create a new book"
+    }
+  }
+}
