@@ -59,7 +59,7 @@ gem "grape-swagger-rails"
 
 gem "grape-entity", "~> 1.0"
 
-gem "grape-swagger-entity", "~> 0.5.5"
+gem "grape-swagger-entity", "~> 0.7.0"
 2
 gem 'capybara'
 
